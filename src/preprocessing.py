@@ -110,8 +110,8 @@ class PreProcessing:
 
 
 class PlayerDataProcessor:
-    def __init__(self, model):
-        self.model = model
+    def __init__(self):
+        pass
 
     def build_player_profile(self, player_data):
         """create rich text profile for embedding"""
