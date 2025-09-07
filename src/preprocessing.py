@@ -134,7 +134,7 @@ class PlayerDataProcessor:
         stats = self.get_performance_summary(player_data['season_statistics']) # performance summary 
         style = self.extract_playing_style(player_data)   # playing style 
         
-        return f"{basic_info}. {club_info}. {physical}. {stats} {style} {club_info}"
+        return f"{basic_info}. {club_info}. {physical}. {stats} {style}"
  
     def get_performance_summary(self, season_stats): 
         """generate performance summary from season statistics"""

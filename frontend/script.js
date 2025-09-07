@@ -273,3 +273,8 @@ class EventHandler{
         $(`#details-${playerId}`).slideToggle();
     }
 }
+
+$(document).ready(function() {
+    EventHandler.initPageEvent();
+    EventHandler.togglePlayerDetails();
+});

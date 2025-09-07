@@ -101,7 +101,7 @@ class HybridPlayerSearch:
         alpha: weight for semantic search (70% semantic)
         """
         # semantic search 
-        semantic_results = self.embedding_engine.search(query, top_k=50)
+        semantic_results = self.embedding_engine.search(query, top_k)
 
         # TF-IDF search 
         query_vector = self.tfidf_vectorizer.transform([query])
@@ -110,7 +110,7 @@ class HybridPlayerSearch:
         # combine semantic scores with TF-IDF scores 
         final_scores = {}
         for result in semantic_results:
-            player_id = result['player']
+            player_id = result['player_id']
             semantic_score = 1 / (1 + result['similarity_score'])
             final_scores[player_id] = alpha * semantic_score
 
