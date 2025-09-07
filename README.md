@@ -1,2 +1,2 @@
-# ⚽🔍 INFORMATION RETRIEVAL SYSTEM FOR FOOTBALL PLAYER 
+# ⚽ Football Player Information Retrieval System
 
