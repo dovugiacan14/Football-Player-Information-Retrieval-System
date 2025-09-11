@@ -87,13 +87,13 @@ class HybridPlayerSearch:
 
         # build TF-IDF vectorizer 
         self.tfidf_vectorizer = TfidfVectorizer(
-            max_features=5000, 
-            stop_words='english', 
-            ngram_range=(1, 2), 
-            max_df=0.8,
-            min_df=2
+            max_features=5000,        # only keep 5000 important features 
+            stop_words='english',      # remove stop words like: the, is, and, in, ...
+            ngram_range=(1, 2),       # get unigram (one word) and bigram
+            max_df=0.8,                 # remove words that appear more than 80% in document 
+            min_df=2                   
         )
-        self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(self.profiles)
+        self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(self.profiles)  # train
 
     def hybrid_search(self, query, top_k=10, alpha=0.7):
         """
