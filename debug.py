@@ -59,7 +59,10 @@ if __name__ == "__main__":
     engine = init_search_engine(players)
 
     # Example search
-    results = search_players(engine, "Brazilian striker good at dribbling", top_k=5, search_type="semantic")
+    results = search_players(engine, "Brazilian striker good at dribbling", top_k=10, search_type="hybrid")
+    with open("mockup_data.json", "w", encoding="utf-8") as file:
+        json.dump(results, file, ensure_ascii=False, indent=4)
+
     print("Search Results:")
     for r in results:
         print(r)
