@@ -10,175 +10,185 @@
 </head>
 
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>⚽ Football Player Search</h1>
-        </div>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>⚽ Football Player Search</h1>
+    </div>
 
-        <!-- Search Form -->
-        <div class="search-section">
-            <div class="search-form">
+    <!-- Search Form -->
+    <div class="search-section">
+        <div class="search-form">
+            <div class="form-group">
+                <label for="query">Search Query</label>
+                <input
+                        type="text" id="query"
+                        placeholder="e.g., Brazilian striker good at dribbling, young defender with pace"
+                >
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="query">Search Query</label>
-                    <input type="text" id="query"
-                        placeholder="e.g., Brazilian striker good at dribbling, young defender with pace">
+                    <label for="top_k">Number of Results</label>
+                    <input type="number" id="top_k" value="10" min="1" max="50">
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="top_k">Number of Results</label>
-                        <input type="number" id="top_k" value="10" min="1" max="50">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="search_type">Search Type</label>
-                        <select id="search_type">
-                            <option value="hybrid">Hybrid (Recommended)</option>
-                            <option value="semantic">Semantic Only</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button class="search-btn" id="search-btn">🔍 Search Players</button>
-            </div>
-        </div>
-
-        <!-- Results Section -->
-        <div class="results-section" id="results-section" style="display: none;">
-            <div class="results-header" id="results-header"></div>
-            <div id="results-container"></div>
-        </div>
-
-        <!-- Player Detail Section -->
-        <div class="player-detail-section" id="player-detail-section" style="display: none;">
-            <div class="detail-header">
-                <p class="detail-subtitle">Player Information</p>
-            </div>
-
-            <div class="player-detail-container">
-                <!-- Left Column - Player Info -->
-                <div class="player-info-column">
-                    <h2 class="player-name" id="player_name"></h2>
-
-                    <!-- Player Profile Card -->
-                    <div class="player-profile-card">
-                        <div class="player-photo">
-                            <img id="player_photo" src="" alt="Player Photo"/>
-                        </div>
-
-                        <div class="player-basic-info">
-                            <!-- Basic Info Grid -->
-                            <div class="info-grid">
-                                <div class="info-row">
-                                    <span class="info-label">Nation</span>
-                                    <span class="info-value" id="player_nation"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Born</span>
-                                    <span class="info-value" id="player_born"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Age</span>
-                                    <span class="info-value" id="player_age"></span>
-                                </div>
-                            </div>
-
-                            <!-- Stats Grid -->
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    <div class="stat-label">Assists</div>
-                                    <div class="stat-value" id="stat_assists"></div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Goals</div>
-                                    <div class="stat-value" id="stat_goals"></div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">SCA</div>
-                                    <div class="stat-value" id="stat_sca"></div>
-                                </div>
-                            </div>
-
-                            <!-- Additional Info -->
-                            <div class="additional-info">
-                                <div class="info-row">
-                                    <span class="info-label">Position</span>
-                                    <span class="info-value" id="player_position"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Min Played</span>
-                                    <span class="info-value" id="player_minutes"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Goals</span>
-                                    <span class="info-value" id="player_goals_detail"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Progressive P90</span>
-                                    <span class="info-value" id="player_progressive"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Avg Passing</span>
-                                    <span class="info-value" id="player-avg-passing"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Squad</span>
-                                    <span class="info-value" id="player_squad"></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">Aerial Duels</span>
-                                    <span class="info-value" id="player_aerial"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Similar Players Table -->
-                    <div class="similar-players-section">
-                        <h3>Similar Players to <span id="similar_player_name">Robert Andrich</span></h3>
-                        <p class="similar-description">
-                            This ranking list is determined through the application of a model based on Cosine
-                            Similarity. It should be noted that being a ranking, the result obtained is inherently
-                            subjective.
-                        </p>
-
-                        <div class="table-container">
-                            <table class="similar-players-table">
-                                <thead>
-                                    <tr>
-                                        <th>Player</th>
-                                        <th>Nation</th>
-                                        <th>Squad</th>
-                                        <th>Pos</th>
-                                        <th>Age</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="similar_players_tbody">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column - Radar Chart -->
-                <div class="radar-chart-column">
-                    <div class="chart-container">
-                        <canvas id="radarChart" width="500" height="500"></canvas>
-                    </div>
-                    <div class="chart-legend" id="chart-legend">
-                        <!-- Legend will be populated dynamically -->
-                    </div>
+                <div class="form-group">
+                    <label for="search_type">Search Type</label>
+                    <select id="search_type">
+                        <option value="hybrid">Hybrid (Recommended)</option>
+                        <option value="semantic">Semantic Only</option>
+                    </select>
                 </div>
             </div>
+
+            <button class="search-btn" id="search-btn">🔍 Search Players</button>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer"></footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="js/event.js"></script>
-    <script src="js/processor.js"></script>
-    <script src="js/submit.js"></script>
+    <!-- Results Section -->
+    <div class="results-section" id="results-section" style="display: none;">
+        <div class="results-header" id="results-header"></div>
+        <div id="results-container"></div>
+    </div>
+
+    <!-- Player Detail Section -->
+    <div class="player-detail-section" id="player-detail-section" style="display: none;">
+        <div class="detail-header">
+            <p class="detail-subtitle">Player Information</p>
+        </div>
+
+        <div class="player-detail-container">
+            <!-- Left Column - Player Info -->
+            <div class="player-info-column">
+                <h2 class="player-name" id="player_name"></h2>
+
+                <!-- Player Profile Card -->
+                <div class="player-profile-card">
+                    <div class="player-photo">
+                        <img id="player_photo" src="" alt="Player Photo"/>
+                    </div>
+
+                    <div class="player-basic-info">
+                        <!-- Basic Info Grid -->
+                        <div class="info-grid">
+                            <div class="info-row">
+                                <span class="info-label">Nation</span>
+                                <span class="info-value" id="player_nation"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Born</span>
+                                <span class="info-value" id="player_born"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Age</span>
+                                <span class="info-value" id="player_age"></span>
+                            </div>
+                        </div>
+
+                        <!-- Stats Grid -->
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">Assists</div>
+                                <div class="stat-value" id="stat_assists"></div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Goals</div>
+                                <div class="stat-value" id="stat_goals"></div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">SCA</div>
+                                <div class="stat-value" id="stat_sca"></div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Info -->
+                        <div class="additional-info">
+                            <div class="info-row">
+                                <span class="info-label">Position</span>
+                                <span class="info-value" id="player_position"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Min Played</span>
+                                <span class="info-value" id="player_minutes"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Appearances</span>
+                                <span class="info-value" id="player_appearance"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Goals</span>
+                                <span class="info-value" id="player_goals_detail"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Progressive</span>
+                                <span class="info-value" id="player_progressive"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Total Passing</span>
+                                <span class="info-value" id="player-avg-passing"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Club</span>
+                                <span class="info-value" id="player_squad"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Aerial Duels</span>
+                                <span class="info-value" id="player_aerial"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column - Radar Chart -->
+            <div class="radar-chart-column">
+                <div class="chart-container">
+                    <canvas id="radarChart" width="500" height="500"></canvas>
+                </div>
+                <div class="chart-legend" id="chart-legend">
+                    <!-- Legend will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Similar Players Table -->
+        <div class="similar-players-section">
+            <h3>Similar Players to <span id="similar_player_name">Robin van Persie</span></h3>
+            <p class="similar-description">
+                This ranking list is determined through the application of a model based on Cosine
+                Similarity. It should be noted that being a ranking, the result obtained is inherently
+                subjective.
+            </p>
+
+            <div class="table-container">
+                <table class="similar-players-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Player</th>
+                        <th>Nation</th>
+                        <th>Squad</th>
+                        <th>Pos</th>
+                        <th>Age</th>
+                    </tr>
+                    </thead>
+                    <tbody id="similar_players_tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer"></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/event.js"></script>
+<script src="js/processor.js"></script>
+<script src="js/submit.js"></script>
 </body>
 </html>

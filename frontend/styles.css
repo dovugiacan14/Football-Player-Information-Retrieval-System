@@ -496,7 +496,7 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-    
+
     .chart-container {
         max-width: 400px;
         height: 400px;
@@ -507,29 +507,29 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
     .form-row {
         flex-direction: column;
     }
-    
+
     .container {
         margin: 10px;
         border-radius: 10px;
     }
-    
+
     .search-section, .results-section, .player-detail-section {
         padding: 20px;
     }
-    
+
     .header {
         padding: 20px;
     }
-    
+
     .header h1 {
         font-size: 2em;
     }
-    
+
     .player-basic {
         flex-direction: column;
         gap: 8px;
     }
-    
+
     .score-badge {
         position: relative;
         top: auto;
@@ -537,16 +537,16 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
         display: inline-block;
         margin-top: 10px;
     }
-    
+
     .info-grid, .stats-grid {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
+
     .player-name {
         font-size: 24px;
     }
-    
+
     .chart-container {
         max-width: 300px;
         height: 300px;
@@ -558,23 +558,23 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
     body {
         padding: 10px;
     }
-    
+
     .search-form {
         padding: 20px;
     }
-    
+
     .header h1 {
         font-size: 1.8em;
     }
-    
+
     .player-profile-card {
         padding: 20px;
     }
-    
+
     .similar-players-table {
         font-size: 12px;
     }
-    
+
     .similar-players-table th,
     .similar-players-table td {
         padding: 8px 10px;
@@ -597,4 +597,46 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
+}
+
+/* Fix bold text in similar players table */
+.similar-players-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f3f4;
+    color: #2c3e50;
+    font-weight: 400 !important; /* Force normal weight */
+    font-size: 14px; /* Same size as other columns */
+}
+
+/* Only make rank column bold, not all text */
+.rank-cell {
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
+    background: #f8f9fa;
+    border-right: 2px solid #e9ecef;
+}
+
+/* Remove any inherited bold styling */
+.similar-players-table tbody tr td {
+    font-weight: normal;
+}
+
+/* Only headers should be bold */
+.similar-players-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Normal font weight for player names and other columns */
+.similar-players-table .player-name {
+    font-weight: 400; /* Same as normal text */
+    color: #2c3e50;
 }
