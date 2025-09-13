@@ -1,5 +1,5 @@
 class PlayerFootballLoadDataHandle {
-    static searchPlayer(data) {
+    static searchPlayer() {
         const query = pageElement.$queryEle.val().trim();
         const topK = parseInt(pageElement.$topK.val());
         const searchType = pageElement.$searchType.val();
@@ -17,23 +17,47 @@ class PlayerFootballLoadDataHandle {
             return;
         }
 
-        // Handle to load Data
-        if (!data || data.length === 0) {
-            console.error("No data available");
-            return;
-        }
+        // call API
+        $.ajax({
+            url: "http://localhost:8000/search",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                query: query,
+                top_k: topK,
+                search_type: searchType
+            }),
+            success: function (response) {
+                const results = response.results;
 
-        pageElement.$resultSection.show();
-        pageElement.$detailSection.show();
-        const mainPlayer = data[0];
-        this.displayMainPlayer(mainPlayer);
+                if (!results || results.length === 0) {
+                    PlayerFootballCommonFunction.showError('No players found');
+                    return;
+                }
 
-        // get remaining player to build similar players
-        const similarPlayers = data.slice(1);
-        this.displaySimilarPlayers(similarPlayers, mainPlayer?.player_data?.fullName || "Unknown Player");
-        //
-        // // create radar chart
-        this.createRadarChart(mainPlayer);
+                // Show sections
+                pageElement.$resultSection.show();
+                pageElement.$detailSection.show();
+
+                // main player
+                const mainPlayer = results[0];
+                PlayerFootballLoadDataHandle.displayMainPlayer(mainPlayer);
+
+                // similar players
+                const similarPlayers = results.slice(1);
+                PlayerFootballLoadDataHandle.displaySimilarPlayers(
+                    similarPlayers,
+                    mainPlayer?.player_data?.fullName || "Unknown Player"
+                );
+
+                // radar chart
+                PlayerFootballLoadDataHandle.createRadarChart(mainPlayer);
+            },
+            error: function (xhr) {
+                console.error("API Error:", xhr.responseText);
+                PlayerFootballCommonFunction.showError('Search failed: ' + xhr.statusText);
+            }
+        });
     }
 
     static displayMainPlayer(playerData) {
@@ -64,7 +88,7 @@ class PlayerFootballLoadDataHandle {
 
 
         // update player image
-        const photoUrl = `https://via.placeholder.com/150x200?text=${encodeURIComponent(player?.firstName)}`;
+        const photoUrl = `../assets/${player?.playerId}.jpg`;
         pageElement.playerPhoto.attr('src', photoUrl).attr('alt', player?.fullName);
 
         // update header result
@@ -144,7 +168,7 @@ class PlayerFootballLoadDataHandle {
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {position: "bottom"}
+                    legend: { position: "bottom" }
                 },
                 scales: {
                     r: {
