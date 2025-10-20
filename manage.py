@@ -34,21 +34,21 @@ async def startup_event():
         with open('summary_player_info.json', 'r', encoding='utf-8') as f:
             players_data = json.load(f)
 
-        print(f"✅ Loaded {len(players_data)} players")
+        print(f"Loaded {len(players_data)} players")
 
         # Initialize search engines
         embedding_engine = PlayerEmbeddingEngine("all-MiniLM-L6-v2")
-        print("🔄 Building embedding index...")
+        print("Building embedding index...")
         embedding_engine.build_index(players_data)
 
         search_engine = HybridPlayerSearch(embedding_engine)
-        print("🔄 Building TF-IDF index...")
+        print("Building TF-IDF index...")
         search_engine.build_tfidf_index(players_data)
 
-        print("✅ Search engines initialized successfully!")
+        print("Search engines initialized successfully!")
 
     except Exception as e:
-        print(f"❌ Error during startup: {e}")
+        print(f"Error during startup: {e}")
         raise
 
 
