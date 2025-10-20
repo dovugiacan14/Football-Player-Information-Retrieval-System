@@ -94,7 +94,7 @@ class PlayerFootballLoadDataHandle {
         // update header result
         pageElement.$resultHeader.html(`
             <h2>Search Results</h2>
-            <p>Found ${data.length} players matching your query</p>
+            <p>Found ${10} players matching your query</p>
         `);
     }
 

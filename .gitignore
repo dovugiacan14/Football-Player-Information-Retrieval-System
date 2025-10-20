@@ -2,3 +2,4 @@ raw_data/
 summary_player_info.json
 __pycache__/
 assets/
+.idea/
