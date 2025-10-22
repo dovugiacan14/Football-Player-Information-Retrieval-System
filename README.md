@@ -67,7 +67,7 @@ Football-Player-Information-Retrieval-System/
 
 1. Start the application:
 ```bash
-python manage.py
+uvicorn manage:app --reload
 ```
 
 2. Open your browser and navigate to:
@@ -81,57 +81,6 @@ http://localhost:5000
 - "Top scorers in Premier League"
 - "Defenders born after 1995"
 
-## API Endpoints
-
-### Search Endpoint
-```
-POST /api/search
-Content-Type: application/json
-
-{
-  "query": "your search query",
-  "method": "hybrid" | "sparql" | "semantic"
-}
-```
-
-### Player Details
-```
-GET /api/player/{player_id}
-```
-
-## Configuration
-
-Create a `.env` file in the root directory:
-```env
-FLASK_PORT=5000
-FLASK_DEBUG=True
-SPARQL_ENDPOINT=http://localhost:3030/football
-```
-
-## Development
-
-Run tests:
-```bash
-pytest tests/
-```
-
-Format code:
-```bash
-black .
-```
-
-Lint code:
-```bash
-flake8 .
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## License
 
